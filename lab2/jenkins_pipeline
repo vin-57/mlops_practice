@@ -16,7 +16,7 @@ pipeline {
                           doGenerateSubmoduleConfigurations: false,
                           extensions: [],
                           submoduleCfg: [],
-                          userRemoteConfigs: [[url: 'https://github.com/vin-57/mlops_practice.git/']]])
+                          userRemoteConfigs: [[url: 'https://github.com/vin-57/mlops_practice']]])
             }
         }
         
