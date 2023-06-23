@@ -4,7 +4,7 @@ import pickle
 
 
 # Loading preprocessed test data from a file
-test_data = pd.read_csv('test_preprocessed/test_data_preprocessed.csv')
+test_data = pd.read_csv('test/test_data.csv')
 
 # Loading a model from the model.pkl file
 with open('model.pkl', 'rb') as f:
