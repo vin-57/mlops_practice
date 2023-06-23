@@ -2,7 +2,7 @@ import streamlit as st
 import pickle
 
 # Load the model
-with open('model.pkl', 'rb') as f:
+with open('lab3/model.pkl', 'rb') as f:
     model = pickle.load(f)
 
 def predict(price, delivery_time, number_of_transit_nodes):
