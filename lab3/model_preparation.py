@@ -6,7 +6,7 @@ import pickle  # to (de)serialize objects
 
 
 # Loading processed train data from train_data_preprocessed.csv file
-train_data = pd.read_csv('train/train_data.csv')
+train_data = pd.read_csv('train_preprocessed/train_data_preprocessed.csv')
 
 # Saving signs of shipping cost, delivery time, number of transit nodesв
 X_train = train_data[['price', 'delivery_time', 'number_of_transit_nodes']]
