@@ -25,6 +25,7 @@ pipeline {
                 // Project build
                 sh 'python3 -m pip install -r lab3/requirements.txt'
                 sh 'python3 lab3/data_creation.py'
+                sh 'python3 lab2/data_preprocessing.py'
                 sh 'python3 lab3/model_preparation.py'
                 sh 'python3 lab3/model_testing.py'
             }
