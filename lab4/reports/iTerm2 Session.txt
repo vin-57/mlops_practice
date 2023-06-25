@@ -1,0 +1,948 @@
+ers/readers.py", line 5 
+77, in _read 
+    parser = TextFileReader(filepath_or_buffer, **kwds) 
+  File "/home/vin-57/.local/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1407, in __init__ 
+    self._engine = self._make_engine(f, self.engine) 
+  File "/home/vin-57/.local/lib/python3.10/site-packages/pandas/io/parsers/readers.py", line 1661, in _make_engine 
+    self.handles = get_handle( 
+  File "/home/vin-57/.local/lib/python3.10/site-packages/pandas/io/common.py", line 859, in get_handle 
+    handle = open( 
+FileNotFoundError: [Errno 2] No such file or directory: 'datasets/data.csv' 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git branch 
+* dvc 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ ls 
+data_creation.py        data_preprocessing3.py          readme 
+data_preprocessing1.py  datasets_storage                requirements.txt 
+data_preprocessing2.py  mlops-390817-2abed062c7fc.json 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ cd datasets_storage 
+vin-57@mlops:~/repo2/mlops_practice/lab4/datasets_storage$ ls 
+data.csv 
+vin-57@mlops:~/repo2/mlops_practice/lab4/datasets_storage$ nano data_creation.py 
+vin-57@mlops:~/repo2/mlops_practice/lab4/datasets_storage$ cs 
+Command 'cs' not found, but can be installed with: 
+apt install csound 
+Please ask your administrator. 
+vin-57@mlops:~/repo2/mlops_practice/lab4/datasets_storage$ св 
+св: command not found 
+vin-57@mlops:~/repo2/mlops_practice/lab4/datasets_storage$ cd 
+vin-57@mlops:~$ cd repo2 
+vin-57@mlops:~/repo2$ cd mlops_practice 
+vin-57@mlops:~/repo2/mlops_practice$ cd lab4 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ nano data_creation.py 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ nano data_preprocessing1.py 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ nano data_preprocessing2.py 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ nano data_preprocessing3.py 
+vin-57@mlops:~/repo2/mlops_practice/lab4$  
+vin-57@mlops:~/repo2/mlops_practice/lab4$ python3 data_preprocessing1.py 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ dvc add datasets_storage 
+100% Adding...|██████████████████████████████████████████████████████|1/1 [00:00, 26.64file/s] 
+                                                                                               
+To track the changes with git, run: 
+ 
+	git add datasets_storage.dvc .gitignore 
+ 
+To enable auto staging, run: 
+ 
+	dvc config core.autostage true 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git add .gitignore datasets_storage.dvc 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git add . 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git commit -m "Modify dataset 1" 
+[dvc bcae958] Modify dataset 1 
+ 6 files changed, 11 insertions(+), 3 deletions(-) 
+ create mode 100644 lab4/.gitignore 
+ create mode 100644 lab4/datasets_storage.dvc 
+ create mode 100644 lab4/mlops-390817-2abed062c7fc.json 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ dvc push 
+ERROR: unexpected error - Failed to authenticate GDrive: Extra data: line 1 column 4 (char 3)  
+ 
+Having any troubles? Hit us up at https://dvc.org/support, we are always happy to help! 
+vin-57@mlops:~/repo2/mlops_practice/lab4$  
+vin-57@mlops:~/repo2/mlops_practice/lab4$  
+vin-57@mlops:~/repo2/mlops_practice/lab4$ dvc remote modify myremote gdrive_use_service_account true 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ dvc remote modify --local myremote                     gdrive_service_account_json_file_path                     /home/vin-57/mlops_practice/lab4/mlops-390817-2abed062c7fc.json 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ dvc push 
+3 files pushed                                                                                                                  
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git push origin master 
+error: src refspec master does not match any 
+error: failed to push some refs to 'https://github.com/vin-57/mlops_practice.git' 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git push origin dvc 
+Username for 'https://github.com': vin-57 
+Password for 'https://vin-57@github.com':  
+Enumerating objects: 14, done. 
+Counting objects: 100% (14/14), done. 
+Delta compression using up to 2 threads 
+Compressing objects: 100% (7/7), done. 
+Writing objects: 100% (9/9), 883 bytes | 883.00 KiB/s, done. 
+Total 9 (delta 4), reused 0 (delta 0), pack-reused 0 
+remote: Resolving deltas: 100% (4/4), completed with 4 local objects. 
+To https://github.com/vin-57/mlops_practice.git 
+   194ec2e..bcae958  dvc -> dvc 
+vin-57@mlops:~/repo2/mlops_practice/lab4$  
+vin-57@mlops:~/repo2/mlops_practice/lab4$  
+vin-57@mlops:~/repo2/mlops_practice/lab4$ python3 data_preprocessing2.py 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ dvc add datasets_storage 
+100% Adding...|███████████████████████████████████████████████████████████████████████████████████████|1/1 [00:00, 17.45file/s] 
+                                                                                                                                
+To track the changes with git, run: 
+ 
+	git add datasets_storage.dvc 
+ 
+To enable auto staging, run: 
+ 
+	dvc config core.autostage true 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git add . 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git commit -m "Modify dataset 2" 
+[dvc 2ad659f] Modify dataset 2 
+ 1 file changed, 3 insertions(+), 3 deletions(-) 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ dvc push 
+2 files pushed                                                                                                                  
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git push origin dvc 
+Username for 'https://github.com': vin-57 
+Password for 'https://vin-57@github.com':  
+Enumerating objects: 7, done. 
+Counting objects: 100% (7/7), done. 
+Delta compression using up to 2 threads 
+Compressing objects: 100% (4/4), done. 
+Writing objects: 100% (4/4), 420 bytes | 420.00 KiB/s, done. 
+Total 4 (delta 2), reused 0 (delta 0), pack-reused 0 
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects. 
+To https://github.com/vin-57/mlops_practice.git 
+   bcae958..2ad659f  dvc -> dvc 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ python3 data_preprocessing3.py 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ dvc add datasets_storage 
+100% Adding...|███████████████████████████████████████████████████████████████████████████████████████|1/1 [00:00, 30.10file/s] 
+                                                                                                                                
+To track the changes with git, run: 
+ 
+	git add datasets_storage.dvc 
+ 
+To enable auto staging, run: 
+ 
+	dvc config core.autostage true 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git add . 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git commit -m "Modify dataset 3" 
+[dvc 3b71bf5] Modify dataset 3 
+ 1 file changed, 3 insertions(+), 3 deletions(-) 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ dvc push 
+2 files pushed                                                                                                                  
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git push origin dvc 
+Username for 'https://github.com': vin-57 
+Password for 'https://vin-57@github.com':  
+Enumerating objects: 7, done. 
+Counting objects: 100% (7/7), done. 
+Delta compression using up to 2 threads 
+Compressing objects: 100% (4/4), done. 
+Writing objects: 100% (4/4), 421 bytes | 421.00 KiB/s, done. 
+Total 4 (delta 2), reused 0 (delta 0), pack-reused 0 
+remote: Resolving deltas: 100% (2/2), completed with 2 local objects. 
+To https://github.com/vin-57/mlops_practice.git 
+   2ad659f..3b71bf5  dvc -> dvc 
+vin-57@mlops:~/repo2/mlops_practice/lab4$  
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git log --oneline 
+q 
+3b71bf5 (HEAD -> dvc, origin/dvc, origin/HEAD) Modify dataset 3 
+2ad659f Modify dataset 2 
+bcae958 Modify dataset 1 
+194ec2e Create requirements.txt 
+845a7b8 Create data_preprocessing3.py 
+08664a5 Create data_preprocessing2.py 
+f6196e2 Create data_preprocessing1.py 
+e5445e3 Create data_creation.py 
+f4291a1 (origin/creation) Create docker-image.yml 
+5c7f98e Merge pull request #4 from vin-57/autotesting 
+cfc1e9a (origin/autotesting) Jupyter–notebook added 
+210fea7 Delete requirements.txt 
+97602c2 Delete model_testing.py 
+2322d5d Delete model_preparation.py 
+e264677 Delete data_preprocessing.py 
+72a219c Delete data_creation.py 
+59707ac Create model_testing.py 
+6844823 Create model_preparation.py 
+255e7df Create data_preprocessing.py 
+ae261fb Create data_creation.py 
+14bb408 Create requirements.txt 
+5916a0e Create app.py 
+...skipping... 
+ 
+ 
+                   SUMMARY OF LESS COMMANDS 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+...skipping... 
+AD^1: No such file or directory  (press RETURN) 
+                   SUMMARY OF LESS COMMANDS 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+HELP -- Press RETURN for more, or q when done...skipping... 
+ 
+                   SUMMARY OF LESS COMMANDS 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+  ESC-F                Like F but stop when search pattern is found. 
+  r  ^R  ^L            Repaint screen. 
+  R                    Repaint screen, discarding buffered input. 
+        --------------------------------------------------- 
+        Default "window" is the screen height. 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+  ESC-F                Like F but stop when search pattern is found. 
+  r  ^R  ^L            Repaint screen. 
+  R                    Repaint screen, discarding buffered input. 
+        --------------------------------------------------- 
+        Default "window" is the screen height. 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+  ESC-F                Like F but stop when search pattern is found. 
+  r  ^R  ^L            Repaint screen. 
+  R                    Repaint screen, discarding buffered input. 
+        --------------------------------------------------- 
+        Default "window" is the screen height. 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+  ESC-F                Like F but stop when search pattern is found. 
+  r  ^R  ^L            Repaint screen. 
+  R                    Repaint screen, discarding buffered input. 
+        --------------------------------------------------- 
+        Default "window" is the screen height. 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+  ESC-F                Like F but stop when search pattern is found. 
+  r  ^R  ^L            Repaint screen. 
+  R                    Repaint screen, discarding buffered input. 
+        --------------------------------------------------- 
+        Default "window" is the screen height. 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+  ESC-F                Like F but stop when search pattern is found. 
+  r  ^R  ^L            Repaint screen. 
+  R                    Repaint screen, discarding buffered input. 
+        --------------------------------------------------- 
+        Default "window" is the screen height. 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+  ESC-F                Like F but stop when search pattern is found. 
+  r  ^R  ^L            Repaint screen. 
+  R                    Repaint screen, discarding buffered input. 
+        --------------------------------------------------- 
+        Default "window" is the screen height. 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+  ESC-F                Like F but stop when search pattern is found. 
+  r  ^R  ^L            Repaint screen. 
+  R                    Repaint screen, discarding buffered input. 
+        --------------------------------------------------- 
+        Default "window" is the screen height. 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+  ESC-F                Like F but stop when search pattern is found. 
+  r  ^R  ^L            Repaint screen. 
+  R                    Repaint screen, discarding buffered input. 
+        --------------------------------------------------- 
+        Default "window" is the screen height. 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+  ESC-F                Like F but stop when search pattern is found. 
+  r  ^R  ^L            Repaint screen. 
+  R                    Repaint screen, discarding buffered input. 
+        --------------------------------------------------- 
+        Default "window" is the screen height. 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+  ESC-F                Like F but stop when search pattern is found. 
+  r  ^R  ^L            Repaint screen. 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+  ESC-F                Like F but stop when search pattern is found. 
+  r  ^R  ^L            Repaint screen. 
+  R                    Repaint screen, discarding buffered input. 
+        --------------------------------------------------- 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+HELP -- Press RETURN for more, or q when done 
+ 
+      Commands marked with * may be preceded by a number, N. 
+      Notes in parentheses indicate the behavior if N is given. 
+      A key preceded by a caret indicates the Ctrl key; thus ^K is ctrl-K. 
+ 
+  h  H                 Display this help. 
+  q  :q  Q  :Q  ZZ     Exit. 
+ --------------------------------------------------------------------------- 
+ 
+                           MOVING 
+ 
+  e  ^E  j  ^N  CR  *  Forward  one line   (or N lines). 
+  y  ^Y  k  ^K  ^P  *  Backward one line   (or N lines). 
+  f  ^F  ^V  SPACE  *  Forward  one window (or N lines). 
+  b  ^B  ESC-v      *  Backward one window (or N lines). 
+  z                 *  Forward  one window (and set window to N). 
+  w                 *  Backward one window (and set window to N). 
+  ESC-SPACE         *  Forward  one window, but don't stop at end-of-file. 
+  d  ^D             *  Forward  one half-window (and set half-window to N). 
+  u  ^U             *  Backward one half-window (and set half-window to N). 
+  ESC-)  RightArrow *  Right one half screen width (or N positions). 
+  ESC-(  LeftArrow  *  Left  one half screen width (or N positions). 
+  ESC-}  ^RightArrow   Right to last column displayed. 
+  ESC-{  ^LeftArrow    Left  to first column. 
+  F                    Forward forever; like "tail -f". 
+HELP -- Press RETURN for more, or q when done...skipping... 
+3b71bf5 (HEAD -> dvc, origin/dvc, origin/HEAD) Modify dataset 3 
+2ad659f Modify dataset 2 
+bcae958 Modify dataset 1 
+194ec2e Create requirements.txt 
+845a7b8 Create data_preprocessing3.py 
+08664a5 Create data_preprocessing2.py 
+f6196e2 Create data_preprocessing1.py 
+e5445e3 Create data_creation.py 
+f4291a1 (origin/creation) Create docker-image.yml 
+5c7f98e Merge pull request #4 from vin-57/autotesting 
+cfc1e9a (origin/autotesting) Jupyter–notebook added 
+210fea7 Delete requirements.txt 
+97602c2 Delete model_testing.py 
+2322d5d Delete model_preparation.py 
+e264677 Delete data_preprocessing.py 
+72a219c Delete data_creation.py 
+59707ac Create model_testing.py 
+6844823 Create model_preparation.py 
+255e7df Create data_preprocessing.py 
+ae261fb Create data_creation.py 
+14bb408 Create requirements.txt 
+5916a0e Create app.py 
+b128383 Update jenkins_pipeline 
+b1f742b Added bash script artifacts 
+17962c7 Merge pull request #3 from vin-57/module1_v2 
+ad1b21e (origin/module1_v2) Update pipeline.sh 
+ce157d3 Update jenkins_pipeline 
+3dbae4c Merge pull request #2 from vin-57/module1_v2 
+328dc76 Merge pull request #1 from vin-57/module1_v1 
+18c8a52 Update pipeline.sh 
+ 
+Command 'q' not found, but can be installed with: 
+snap install q                       # version 1.6.3-1, or 
+apt  install python3-q-text-as-data  # version 3.1.6-1 
+See 'snap info q' for additional versions. 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git checkout HEAD^1 
+Note: switching to 'HEAD^1'. 
+ 
+You are in 'detached HEAD' state. You can look around, make experimental 
+changes and commit them, and you can discard any commits you make in this 
+state without impacting any branches by switching back to a branch. 
+ 
+If you want to create a new branch to retain commits you create, you may 
+do so (now or later) by using -c with the switch command. Example: 
+ 
+  git switch -c <new-branch-name> 
+ 
+Or undo this operation with: 
+ 
+  git switch - 
+ 
+Turn off this advice by setting config variable advice.detachedHead to false 
+ 
+HEAD is now at 2ad659f Modify dataset 2 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git log --oneline 
+q 
+2ad659f (HEAD) Modify dataset 2 
+bcae958 Modify dataset 1 
+194ec2e Create requirements.txt 
+845a7b8 Create data_preprocessing3.py 
+08664a5 Create data_preprocessing2.py 
+f6196e2 Create data_preprocessing1.py 
+e5445e3 Create data_creation.py 
+f4291a1 (origin/creation) Create docker-image.yml 
+5c7f98e Merge pull request #4 from vin-57/autotesting 
+cfc1e9a (origin/autotesting) Jupyter–notebook added 
+210fea7 Delete requirements.txt 
+97602c2 Delete model_testing.py 
+2322d5d Delete model_preparation.py 
+e264677 Delete data_preprocessing.py 
+72a219c Delete data_creation.py 
+59707ac Create model_testing.py 
+6844823 Create model_preparation.py 
+255e7df Create data_preprocessing.py 
+ae261fb Create data_creation.py 
+14bb408 Create requirements.txt 
+5916a0e Create app.py 
+b128383 Update jenkins_pipeline 
+b1f742b Added bash script artifacts 
+17962c7 Merge pull request #3 from vin-57/module1_v2 
+ad1b21e (origin/module1_v2) Update pipeline.sh 
+ce157d3 Update jenkins_pipeline 
+3dbae4c Merge pull request #2 from vin-57/module1_v2 
+328dc76 Merge pull request #1 from vin-57/module1_v1 
+18c8a52 Update pipeline.sh 
+d364216 Create requirements.txt 
+Command 'q' not found, but can be installed with: 
+snap install q                       # version 1.6.3-1, or 
+apt  install python3-q-text-as-data  # version 3.1.6-1 
+See 'snap info q' for additional versions. 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ dvc pull 
+M       datasets_storage/                                              
+1 file modified 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git checkout 3b71bf5 
+Previous HEAD position was 2ad659f Modify dataset 2 
+HEAD is now at 3b71bf5 Modify dataset 3 
+vin-57@mlops:~/repo2/mlops_practice/lab4$  
+vin-57@mlops:~/repo2/mlops_practice/lab4$ history > my_bash_history.tx 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ ls 
+data_creation.py        datasets_storage                readme 
+data_preprocessing1.py  datasets_storage.dvc            requirements.txt 
+data_preprocessing2.py  mlops-390817-2abed062c7fc.json 
+data_preprocessing3.py  my_bash_history.tx 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ rm history > my_bash_history.tx 
+rm: cannot remove 'history': No such file or directory 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ rm my_bash_history.tx 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ ls 
+data_creation.py        data_preprocessing3.py  mlops-390817-2abed062c7fc.json 
+data_preprocessing1.py  datasets_storage        readme 
+data_preprocessing2.py  datasets_storage.dvc    requirements.txt 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ history > my_bash_history.txt 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ mkdir screenshorts 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ ls 
+data_creation.py        datasets_storage                readme 
+data_preprocessing1.py  datasets_storage.dvc            requirements.txt 
+data_preprocessing2.py  mlops-390817-2abed062c7fc.json  screenshorts 
+data_preprocessing3.py  my_bash_history.txt 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ nano my_bash_history.txt 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git status 
+HEAD detached at 3b71bf5 
+Untracked files: 
+  (use "git add <file>..." to include in what will be committed) 
+	my_bash_history.txt 
+ 
+nothing added to commit but untracked files present (use "git add" to track) 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ add my_bash_history.txt 
+Command 'add' not found, did you mean: 
+  command 'hadd' from snap root-framework (v6-28-04) 
+  command 'ddd' from deb ddd (1:3.3.12-5.3build1) 
+  command 'aid' from deb id-utils (4.6.28-20200521ss15dab) 
+  command 'dd' from deb coreutils (8.32-4.1ubuntu1) 
+  command 'atd' from deb at (3.2.5-1ubuntu1) 
+  command 'axd' from deb afnix (3.5.0-3) 
+  command 'adb' from deb adb (1:10.0.0+r36-9) 
+  command 'ldd' from deb libc-bin (2.35-0ubuntu3.1) 
+  command 'ad' from deb netatalk (3.1.12~ds-9ubuntu0.22.04.1) 
+  command 'tdd' from deb devtodo (0.1.20+git20200830.0ad52b0-1) 
+  command 'pdd' from deb pdd (1.5-1) 
+  command 'and' from deb and (1.2.2-4.2) 
+  command 'adr' from deb adr-tools (3.0.0-2) 
+See 'snap info <snapname>' for additional versions. 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git add my_bash_history.txt 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git add screenshorts 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git status 
+HEAD detached at 3b71bf5 
+Changes to be committed: 
+  (use "git restore --staged <file>..." to unstage) 
+	new file:   my_bash_history.txt 
+ 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git commit -m "Added bash history" 
+[detached HEAD 46d28a0] Added bash history 
+ 1 file changed, 259 insertions(+) 
+ create mode 100644 lab4/my_bash_history.txt 
+vin-57@mlops:~/repo2/mlops_practice/lab4$ git push origin dvc 
+Username for 'https://github.com': vin-57 
+Password for 'https://vin-57@github.com':  
+Everything up-to-date 
+vin-57@mlops:~/repo2/mlops_practice/lab4$  
