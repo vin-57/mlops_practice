@@ -2,7 +2,7 @@ import pandas as pd
 from sklearn.preprocessing import OneHotEncoder
 
 # Загрузка модифицированного датасета
-df = pd.read_csv('datasets/data_prep2.csv')
+df = pd.read_csv('datasets_storage/data_prep2.csv')
 
 # Создание нового признака с использованием one-hot-encoding для поля "departure_city"
 onehot_encoder = OneHotEncoder(sparse_output=False)  # Явно указываем sparse_output=False
